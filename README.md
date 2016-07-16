@@ -10,7 +10,7 @@ Steps to configure a ubuntu linux server and host a Flask application
 
 1. Download private key and save it in the .ssh folder
 2. Connect to the server as the root user using the key using Git Bash
-⋅⋅* ssh -i ~/.ssh/udacity_key.rsa root@ip.address
+* ssh -i ~/.ssh/udacity_key.rsa root@ip.address
 
 ##Create a new user grader
 
