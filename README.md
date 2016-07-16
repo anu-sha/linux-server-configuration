@@ -78,6 +78,7 @@ Steps to configure a ubuntu linux server and host a Flask application
 
 ###References
 * [https://help.ubuntu.com/lts/serverguide/NTP.html](https://help.ubuntu.com/lts/serverguide/NTP.html)
+* [http://www.pool.ntp.org/zone/us](http://www.pool.ntp.org/zone/us)
 
 1. Install NTP to configure timezone to UTC
   * sudo apt-get install ntp
@@ -106,8 +107,120 @@ Steps to configure a ubuntu linux server and host a Flask application
 
 ###References
 * Udacity
+* [http://askubuntu.com/questions/454497/apache2-could-not-reliably-determine-the-servers-fully-qualified-domain-name](http://askubuntu.com/questions/454497/apache2-could-not-reliably-determine-the-servers-fully-qualified-domain-name)
 
-1. 
+1. Install Apache2.
+  * sudo apt-get install apache2
+2. Install mod_wsgi to serve Python appplications
+  * sudo apt-get install libapache2-mod-wsgi python-dev
+3. Configure Apache to handle requests by editing the default conf file.
+  * sudo nano /etc/apach2/sites-enabled/000-default.conf
+  * Add the following line in VirtualHost block: WSGIScriptAlias / /var/www/html/myapp.wsgi
+4. Restart apache
+  * sudo apache2ctl restart 
+5. Create the myapp.wsgi file and add the following lines to serve the application.
+  ~~~python
+    def application(environ, start_response):
+    status = '200 OK'
+    output = 'Hello World!'
+
+    response_headers = [('Content-type', 'text/plain'), ('Content-Length', str(len(output)))]
+    start_response(status, response_headers)
+
+    return [output]
+   ~~~ 
+    
+ ##Install and configure PostgreSQL
+ 
+ ###References
+ * Udacity
+ * [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-0](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-0)
+ * [http://www.cyberciti.biz/faq/howto-add-postgresql-user-account/](http://www.cyberciti.biz/faq/howto-add-postgresql-user-account/)
+ * [https://www.postgresql.org/docs/9.1/static/sql-alterdatabase.html](https://www.postgresql.org/docs/9.1/static/sql-alterdatabase.html)
+ 
+1. Install PostgreSQL
+  * sudo apt-get install postgresql
+2. Login using the default postgres account
+  * sudo -i -u postgres
+3. Go to the postgres prompt.
+  * psql
+4. Checked the configuration file for remote connections. By default remote connectons are disabled.
+  * sudo nano /etc/postgresql/9.3/main/pg_hba.conf
+5. Create a user catalog
+  * CREATE USER catalog WITH PASSWORD 'pwd'
+6. Create the database ItemCatalog to serve the Item Catalog app.
+  * CREATE DATABASE ItemCatalog 
+7. Connect to the database
+  * \c ItemCatalog
+8. Give permissions to the catalog user to the ItemCatalog database
+  * ALTER DATABASE ItemCatalog owner catalog
+9. Exit the psql prompt
+  * \q
+  * exit
+
+##Install Git and cloning ItemCatalog app
+
+###References
+* [https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-14-04](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-14-04)
+* 
+
+1. Install Git
+  * sudo apt-get install git
+  * sudo apt-get install build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip
+2. Get the app files from Git
+  * wget https://github.com/anu-sha/ItemCatalog/archive/master.zip -o git.zip
+3. Unzip the files and copy them to the www folder /var/www/ItemCatalog/ItemCatalog
+  * unzip master.zip
+4. Configure global git variables
+  * git config --global user.name -name
+  * git config --global user.email -email
+
+##Configuration to run the app on the server
+
+###References
+* [https://www.howtoinstall.co/en/ubuntu/trusty/python-flask-sqlalchemy](https://www.howtoinstall.co/en/ubuntu/trusty/python-flask-sqlalchemy)
+* [http://stackoverflow.com/questions/28900950/importerror-no-module-named-psycopg2](http://stackoverflow.com/questions/28900950/importerror-no-module-named-psycopg2)
+* [https://www.howtoinstall.co/en/ubuntu/trusty/python-oauth2client](https://www.howtoinstall.co/en/ubuntu/trusty/python-oauth2client)
+
+1. Install python, flask, psycopg2 and oauth2 modules
+  * sudo apt-get install python-pip
+  * sudo apt-get install Flask
+  * sudo apt-get install python-flask-sqlalchemy
+  * sudo apt-get install python-psycopg2
+  * sudo apt-get install python-oauth2client
+2. Configure the host by editing the init file and conference files as described above.
+3. Rename the application.py to __init__.py
+  * sudo nano /var/www/ItemCatalog/ItemCatalog/__init__.py
+  * sudo nano /etc/apache2/sites-available/itemcatalog.conf
+4. Create the wsgi file
+  * sudo nano /var/www/Itemcatalog.wsgi
+  ~~~ python
+   #!/usr/bin/python
+  import sys
+  import logging
+  logging.basicConfig(stream=sys.stderr)
+  sys.path.insert(0,"/var/www/catalog/")
+
+  from catalog import app as application
+  application.secret_key = 'Add your secret key'
+  ~~~
+4. Edit the __init__.py file to include absolute path to client secrets file
+5. Run the database_set.py file to create the database tables.
+  * python database_setup.py
+6. Enable the app
+  * sudo a2ensite ItemCatalog
+7. Browse to the site using the server ip address. If everything is setup right, the catalog app should eb displayed.
+8. If there are any errors, check the error logs to find what the error is.
+  * cat /var/log/apache2/error.log
+9. Find the amazon ec2 hosted url for the server and add it to the allowed javascript origine=s in the google app settings.
+10. Browse to the app using the amazon ec2 url.
+
+
+  
+  
+ 
+
+  
 
 
 
