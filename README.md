@@ -74,6 +74,44 @@ Steps to configure a ubuntu linux server and host a Flask application
 1. Edit the sshd_config file to change the port number.
   * sudo nano /etc/ssh/sshd_config
 
+##Configure local timezone to UTC
+
+###References
+* [https://help.ubuntu.com/lts/serverguide/NTP.html](https://help.ubuntu.com/lts/serverguide/NTP.html)
+
+1. Install NTP to configure timezone to UTC
+  * sudo apt-get install ntp
+  * sudo dpkg-reconfigure tzdata
+  * Note - Select the servers closest to your geographic location.
+2. Edit the ntp.conf file to set the timezone
+  * $ sudo nano /etc/ntp.conf
+  * Edit the server information.
+
+## Configure UFW for incoming connections
+
+###References
+* Udacity
+
+1. Check the status of UFW. Disable if it is active.
+  * sudo ufw status
+  * sudo ufw disable
+2. Run the following commands to configure the ports
+  * sudo ufw allow 2200/ssh
+  * sudo ufw allow www
+  * sudo ufw allow ntp
+3. Enable UFW
+  * sudo ufw enable
+
+## Install and configure Apache
+
+###References
+* Udacity
+
+1. 
+
+
+
+
   
 
 
