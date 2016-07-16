@@ -20,3 +20,11 @@ Steps to configure a ubuntu linux server and host a Flask application
 1. Create the user
 ..* sudo adduser grader *..
 
+##Give sudo permissions to the user 'grader'
+
+###References
+* [http://askubuntu.com/questions/168280/how-do-i-grant-sudo-privileges-to-an-existing-user]
+
+1. Use the command to edit the permissions
+..* visudo *..
+2. Edit the file to add grader to the list of users with sudo permissions
