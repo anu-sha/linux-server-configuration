@@ -209,6 +209,10 @@ Steps to configure a ubuntu linux server and host a Flask application
   * python database_setup.py
 6. Enable the app
   * sudo a2ensite ItemCatalog
+7. Make the git repository inaccessible from the browser
+  * sudo nano /var/www/ItemCatalog/.htaccess
+  * Add the following line to the htaccess file
+    * RedirectMatch 404 /\.git
 7. Browse to the site using the server ip address. If everything is setup right, the catalog app should eb displayed.
 8. If there are any errors, check the error logs to find what the error is.
   * cat /var/log/apache2/error.log
