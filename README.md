@@ -1,6 +1,12 @@
 # Linux Server Configuration
 Steps to configure a ubuntu linux server and host a Flask application
 
+##App Details:
+1. IP address - 52.26.98.76
+2. SSH Port - 2200
+3. Url - [http://ec2-52-26-98-76.us-west-2.compute.amazonaws.com/](http://ec2-52-26-98-76.us-west-2.compute.amazonaws.com/)
+
+
 #Steps
 
 ##Launching virtual machine
