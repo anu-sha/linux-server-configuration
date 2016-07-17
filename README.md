@@ -35,6 +35,7 @@ Steps to configure a ubuntu linux server and host a Flask application
 ###References
 * [https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server)
 * [http://stackoverflow.com/questions/22530886/ssh-copy-id-no-identities-found-error](http://stackoverflow.com/questions/22530886/ssh-copy-id-no-identities-found-error)
+* [http://askubuntu.com/questions/244115/how-do-i-enforce-a-password-complexity-policy](http://askubuntu.com/questions/244115/how-do-i-enforce-a-password-complexity-policy)
 
 ###Logging in as grader
 1. Generate a public key using sshkeygen in a new command window
@@ -130,13 +131,13 @@ Steps to configure a ubuntu linux server and host a Flask application
     return [output]
    ~~~ 
     
- ##Install and configure PostgreSQL
+##Install and configure PostgreSQL
  
- ###References
- * Udacity
- * [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-0](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-0)
- * [http://www.cyberciti.biz/faq/howto-add-postgresql-user-account/](http://www.cyberciti.biz/faq/howto-add-postgresql-user-account/)
- * [https://www.postgresql.org/docs/9.1/static/sql-alterdatabase.html](https://www.postgresql.org/docs/9.1/static/sql-alterdatabase.html)
+###References
+* Udacity
+* [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-0](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-0)
+* [http://www.cyberciti.biz/faq/howto-add-postgresql-user-account/](http://www.cyberciti.biz/faq/howto-add-postgresql-user-account/)
+* [https://www.postgresql.org/docs/9.1/static/sql-alterdatabase.html](https://www.postgresql.org/docs/9.1/static/sql-alterdatabase.html)
  
 1. Install PostgreSQL
   * sudo apt-get install postgresql
