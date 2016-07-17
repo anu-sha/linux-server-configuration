@@ -63,6 +63,7 @@ Steps to configure a ubuntu linux server and host a Flask application
 1. Login as grader and try running any command using sudo.
   * eg: visudo 
   * If the command works fine, the graer now has sudo privileges 
+2. Disable remote access to root by editing /etc/ssh/ssh_config and setting PermitRootLogin to no
 
 ##Update currently installed packages
 
